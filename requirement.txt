@@ -1,0 +1,24 @@
+# Core libraries
+numpy
+sounddevice
+opencv-python
+speechrecognition
+pyttsx3
+gTTS
+difflib
+
+# Face recognition
+face-recognition
+dlib
+
+# Azure Cognitive Services
+azure-cognitiveservices-speech
+
+# OpenAI
+openai
+
+# Torch (PyTorch)
+torch
+
+# Optional but commonly needed
+pyaudio
