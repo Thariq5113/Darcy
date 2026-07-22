@@ -96,7 +96,7 @@ The face encodings path is currently hardcoded:
 3. Run the main script:
 
 ```bash
-python3 main.py
+python3 as7new.py
 ```
 
 4. Speak a command (e.g., *"hello"*, *"hi"*, *"darcy"*) or press **`h`** on the keyboard to manually trigger the greeting flow.
