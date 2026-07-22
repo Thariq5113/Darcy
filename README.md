@@ -88,11 +88,6 @@ The face encodings path is currently hardcoded:
 
 ```python
 /home/ecerobo/encodings.pickle
-```
-
-Update this to match your own file location before running.
-
----
 
 ## 🚀 Usage
 
@@ -132,6 +127,3 @@ python3 main.py
 
 ---
 
-## 📄 License
-
-Add your preferred license here (e.g., MIT, Apache 2.0).
