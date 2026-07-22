@@ -1,5 +1,5 @@
 [README (1).md](https://github.com/user-attachments/files/30259532/README.1.md)
-# AI Voice-Assisted Welcome Robot 🤖
+# AI Voice-Assisted Welcome Robot 
 
 A humanoid welcome/reception robot built on **Raspberry Pi 5** that combines face recognition, speech recognition, text-to-speech, and servo-driven gestures to deliver personalized greetings and simple physical interactions.
 
