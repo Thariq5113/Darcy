@@ -58,7 +58,7 @@ pip install opencv-python face_recognition sounddevice SpeechRecognition pyttsx3
 
 ```
 .
-├── main.py               # Main control loop (this file)
+├── as7new.py               # Main control loop (this file)
 ├── gesf1.py              # Servo gesture module (hello_action, grab_action, release_action)
 ├── gesf2.py              # Servo gesture module (wave_action, etc.)
 ├── encodings.pickle      # Pre-generated face encodings + names
