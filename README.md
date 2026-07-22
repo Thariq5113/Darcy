@@ -1,4 +1,4 @@
-[README (1).md](https://github.com/user-attachments/files/30259532/README.1.md)
+[README (2).md](https://github.com/user-attachments/files/30260228/README.2.md)
 # AI Voice-Assisted Welcome Robot 
 
 A humanoid welcome/reception robot built on **Raspberry Pi 5** that combines face recognition, speech recognition, text-to-speech, and servo-driven gestures to deliver personalized greetings and simple physical interactions.
@@ -10,6 +10,7 @@ A humanoid welcome/reception robot built on **Raspberry Pi 5** that combines fac
 - **Face Recognition** — Detects and identifies visitors in real time using a pre-trained `encodings.pickle` face database, then greets known people by name.
 - **Voice Interaction** — Listens continuously via microphone, converts speech to text (Google Speech Recognition, with optional offline PocketSphinx support), and responds through a rule-based intent engine.
 - **Custom Chatbot Engine** — A lightweight intent-matching system (exact match → keyword containment → fuzzy matching via `difflib`) covering greetings, time/date queries, general conversation, and command handling.
+- **AI-Generated Responses (Cohere)** — Falls back to the Cohere API for open-ended or unmatched queries, generating natural conversational responses beyond the fixed intent dictionary.
 - **Servo-Driven Gestures** — Drives 12+ servo motors through an I2C PWM driver board to perform physical actions (wave, handshake, grab, release) in response to voice commands or recognized faces.
 - **Text-to-Speech** — Converts responses to speech using `pyttsx3`, played back through a configurable audio output device.
 - **Live Camera Feed** — Displays the camera stream with real-time face bounding boxes, name labels, and an FPS counter.
@@ -42,12 +43,13 @@ A humanoid welcome/reception robot built on **Raspberry Pi 5** that combines fac
 - `gTTS`
 - `numpy`
 - `torch`
+- `cohere`
 - `pickle` (standard library)
 
 Install dependencies:
 
 ```bash
-pip install opencv-python face_recognition sounddevice SpeechRecognition pyttsx3 gTTS numpy torch
+pip install opencv-python face_recognition sounddevice SpeechRecognition pyttsx3 gTTS numpy torch cohere
 ```
 
 > **Note:** `face_recognition` depends on `dlib`, which may require additional system-level build tools on Raspberry Pi OS (`cmake`, `build-essential`, etc.).
@@ -58,7 +60,7 @@ pip install opencv-python face_recognition sounddevice SpeechRecognition pyttsx3
 
 ```
 .
-├── as7new.py               # Main control loop (this file)
+├── main.py               # Main control loop (this file)
 ├── gesf1.py              # Servo gesture module (hello_action, grab_action, release_action)
 ├── gesf2.py              # Servo gesture module (wave_action, etc.)
 ├── encodings.pickle      # Pre-generated face encodings + names
@@ -84,10 +86,33 @@ FACE_MODEL = 'hog'         # 'hog' for speed, 'large' (cnn) for accuracy
 
 Update `CAMERA_INDEX`, `SPEAKER_INDEX`, and `MICROPHONE_INDEX` to match your connected hardware (check with `arecord -l` / `v4l2-ctl --list-devices` on Raspberry Pi OS).
 
+### Cohere API Key
+
+<!-- TODO: Add your Cohere API key setup here, e.g.:
+export COHERE_API_KEY="your-key-here"
+or load it via python-dotenv / os.environ.get("COHERE_API_KEY")
+-->
+
 The face encodings path is currently hardcoded:
 
 ```python
 /home/ecerobo/encodings.pickle
+```
+
+Update this to match your own file location before running.
+
+---
+
+## 🧠 AI Response Generation (Cohere)
+
+<!-- TODO: Describe your Cohere integration here, e.g.:
+- When is the Cohere API called? (e.g., as a fallback when `get_response()` finds no match in `custom_chatbot`)
+- Which Cohere model/endpoint is used (e.g., `command-r`, `chat`)?
+- Any prompt template or system instructions passed to the API
+- How the API response is post-processed before being sent to `speak()`
+-->
+
+---
 
 ## 🚀 Usage
 
@@ -96,7 +121,7 @@ The face encodings path is currently hardcoded:
 3. Run the main script:
 
 ```bash
-python3 as7new.py
+python3 main.py
 ```
 
 4. Speak a command (e.g., *"hello"*, *"hi"*, *"darcy"*) or press **`h`** on the keyboard to manually trigger the greeting flow.
